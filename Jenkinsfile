@@ -1,42 +1,23 @@
 pipeline {
-
   agent any
-
-
-
   stages {
-
-    stage('Stage1') {
-
+    stage('SCM') {
       steps {
-
-        bat 'terraform init'
-
+        git(url: 'https://github.com/mewimran123/Repo4', branch: 'Main', credentialsId: 'bafbdca8-4e63-4ae2-94fe-7a28f70c54cc', poll: true)
       }
-
     }
 
-   stage('Stage2') {
-
+    stage('terraform') {
       steps {
-
-        echo 'Hello World'
-
+        bat(script: 'terraform init', label: 'init')
       }
-
     }
 
-   stage('Stage3') {
-
+    stage('deploye') {
       steps {
-
-        echo 'Hello World'
-
+        bat 'echo "Deploye to prod"'
       }
-
     }
 
   }
-
 }
-
